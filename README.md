@@ -1,4 +1,4 @@
-Setup Instruction laravel 9 (Latest)
+Setup Instruction  laravel 9 (Latest)
 ----------------
 required ->php 8.1 
 1)composer install
