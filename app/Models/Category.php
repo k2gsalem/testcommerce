@@ -10,14 +10,14 @@ class Category extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'category_short_code',
+        // 'category_short_code',
         'category_desc',
 
     ];
     protected $casts = [     
         'id' => 'integer',
         'title'=>'string',
-        'category_short_code'=>'string',
+        // 'category_short_code'=>'string',
         'category_desc'=>'string',
     ];
     public function items()

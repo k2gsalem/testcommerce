@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('category_short_code',200)->unique();
-            $table->mediumText('category_desc');
             $table->string('title',300);
+            // $table->string('category_short_code',200)->unique();
+            $table->mediumText('category_desc');
+            
             $table->timestamps();
         });
     }
