@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Models\Category;
 use League\Fractal\TransformerAbstract;
 
 class CategoryTransformer extends TransformerAbstract
@@ -29,10 +30,16 @@ class CategoryTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform()
+    public function transform(Category $model)
     {
         return [
             //
+            'id'=>$model->id,
+            'category_short_code'=>$model->category_short_code,
+            'category_desc'=>$model->category_desc,
+            'title'=>$model->title,
+            'created_at'=>$model->created_at,
+            'updated_at'=>$model->updated_at,
         ];
     }
 }

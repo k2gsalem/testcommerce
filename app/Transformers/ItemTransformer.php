@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Models\Item;
 use League\Fractal\TransformerAbstract;
 
 class ItemTransformer extends TransformerAbstract
@@ -29,10 +30,17 @@ class ItemTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform()
+    public function transform(Item $model)
     {
         return [
             //
+            'id'=>$model->id,
+            'category_id'=>$model->category_id,
+            'title'=>$model->title,
+            'item_desc'=>$model->item_desc,
+            'price'=>$model->price,
+            'created_at'=>$model->created_at,
+            'updated_at'=>$model->updated_at,
         ];
     }
 }
