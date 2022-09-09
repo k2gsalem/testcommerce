@@ -35,8 +35,7 @@ class CategoryTransformer extends TransformerAbstract
         return [
             //
             'id'=>$model->id,
-            'title'=>$model->title,
-            // 'category_short_code'=>$model->category_short_code,
+            'title'=>$model->title,        
             'category_desc'=>$model->category_desc,            
             'created_at'=>$model->created_at,
             'updated_at'=>$model->updated_at,

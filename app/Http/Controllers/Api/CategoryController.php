@@ -43,10 +43,9 @@ class CategoryController extends Controller
             'title' => ['required', 'string', 'max:200'],
             'category_desc' => ['required', 'string', 'max:200']
         ];
-
-        $this->model->create($request->all());
-        $category = $this->validate($request, $rules);
-        return fractal($category, new CategoryTransformer())->respond(201);
+        $this->validate($request, $rules);
+        $category=$this->model->create($request->all());     
+        return fractal($category,new CategoryTransformer())->respond(201);
     }
 
     /**

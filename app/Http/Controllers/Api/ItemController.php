@@ -40,14 +40,13 @@ class ItemController extends Controller
     {
         //
         $rules = [            
-            'category_id'=>['required','string','exists:categories,id'],
+            'category_id'=>['required','integer','exists:categories,id'],
             'title'=>['required','string', 'max:200'],
             'item_desc'=>['required','string', 'max:500'],
             'price'=>['required','regex:/^\d*(\.\d{1,2})?$/']           
         ];
-
-        $this->model->create($request->all());
-        $item = $this->validate($request, $rules);
+        $this->validate($request, $rules);
+        $item =$this->model->create($request->all());        
         return fractal($item, new ItemTransformer())->respond(201);
     }
 
@@ -74,7 +73,7 @@ class ItemController extends Controller
     {
         //
         $rules = [            
-            'category_id'=>['required','string','exists:categories,id'],
+            'category_id'=>['required','integer','exists:categories,id'],
             'title'=>['required','string', 'max:200'],
             'item_desc'=>['required','string', 'max:500'],
             'price'=>['required','regex:/^\d*(\.\d{1,2})?$/']           
