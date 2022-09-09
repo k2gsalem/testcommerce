@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Item;
 use App\Transformers\ItemTransformer;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ItemController extends Controller
 {
@@ -46,7 +48,13 @@ class ItemController extends Controller
             'price'=>['required','regex:/^\d*(\.\d{1,2})?$/']           
         ];
         $this->validate($request, $rules);
-        $item =$this->model->create($request->all());        
+        $item =$this->model->create($request->all());  
+        if ($request->hasFile('item_image') && $request->file('item_image')->isValid()) {
+            // $file = $request->file('avatar');
+            $item->clearMediaCollection('item_image');
+            $item->addMediaFromRequest('item_image')->toMediaCollection('item_image');
+            // $user->addMedia($file)->toMediaCollection('avatar');
+        }      
         return fractal($item, new ItemTransformer())->respond(201);
     }
 
@@ -94,5 +102,15 @@ class ItemController extends Controller
         //
         $item->delete();
         return response()->json(null, 204);
+    }
+    public function itemFilter(Request $request)
+    {
+
+        $paginator = QueryBuilder::for(Item::class)
+            ->allowedFilters(['title', AllowedFilter::exact('category_id'), AllowedFilter::scope('price_between')])
+            ->allowedIncludes(['category'])
+            ->paginate($request->get('limit', config('app.pagination_limit')));
+           
+            return fractal($paginator, new ItemTransformer());
     }
 }

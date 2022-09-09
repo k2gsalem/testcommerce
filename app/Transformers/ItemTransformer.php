@@ -39,6 +39,7 @@ class ItemTransformer extends TransformerAbstract
             'title'=>$model->title,
             'item_desc'=>$model->item_desc,
             'price'=>$model->price,
+            'item_image' => $model->getFirstMediaUrl('item_image') ?: $model->defaultPhotoUrl(),
             'created_at'=>$model->created_at,
             'updated_at'=>$model->updated_at,
         ];

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('user',[UserController::class,'store']);
 Route::post('login',[UserController::class,'login']);
+Route::get('itemFilter',[ItemController::class,'itemFilter']);
 Route::apiResource('category',CategoryController::class);
 Route::apiResource('item',ItemController::class);
 Route::middleware(['auth:sanctum'])->group(function () {
